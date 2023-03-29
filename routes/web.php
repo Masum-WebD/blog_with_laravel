@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Models\Blogs;
 use App\Models\BlogTags;
@@ -16,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(["auth"])->group(function(){
+    Route::get('/dashboard', function (){
+        return view('dashboard',[
+            'title' => 'Dashboard'
+        ]);
+    });
+});
 
 Route::middleware(["web"])->group(function(){
-
     Route::get('/', [HomeController::class,'home']);
+    Route::get('/login', [AuthController::class,'loginView'])->name("login");
+
 });
 
