@@ -30,6 +30,7 @@ class BlogRepository
             ->where("id", ">" ,0)
             ->limit($pageLength)
             ->offset(($page - 1) * $pageLength)
+            ->orderBy("created_at","desc")
             ->get()
             ->toArray();
     }

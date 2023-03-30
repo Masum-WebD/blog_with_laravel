@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DatatabalesRequest;
+use App\Http\Requests\DatatablesRequest;
 use App\Modules\Users\UsersService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -13,19 +13,17 @@ class UserController extends Controller
 {
     public function __construct(
         private readonly UsersService $service
-    )
-    {
-
+    ) {
     }
 
-    public function index(DatatabalesRequest $request):JsonResponse
+    public function index(DatatablesRequest $request): JsonResponse
     {
 
-        $data =$request ->data();
+        $data = $request->data();
         dd($data);
-        try{
+        try {
             return response()->json($this->service->index($request->$data()));
-        }catch(Exception $error){
+        } catch (Exception $error) {
 
             return response()->json(
                 [
@@ -35,7 +33,5 @@ class UserController extends Controller
                 Response::HTTP_BAD_REQUEST
             );
         }
-
-
     }
 }

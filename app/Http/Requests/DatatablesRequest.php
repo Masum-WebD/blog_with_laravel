@@ -7,7 +7,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DatatabalesRequest extends FormRequest
+class DatatablesRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -28,11 +28,11 @@ class DatatabalesRequest extends FormRequest
     public function data(): array
     {
         return [
-            "columns" =>$this->input("columns"),
-            "start" =>$this->input("start", 0),
-            "length" =>$this->input("length", 0),
-            "order" => $this->input("order"),
-            "search" =>$this->input("search"),
+            "columns" => $this->formatRequest($this->input("columns")),
+            "start" => (int)$this->input("start", 0),
+            "length" => (int)$this->input("length", 0),
+            "order" => $this->formatRequest($this->input("order")),
+            "search" => $this->formatRequest($this->input("search")),
         ];
     }
 
@@ -54,5 +54,4 @@ class DatatabalesRequest extends FormRequest
         }
         return $result;
     }
-
 }

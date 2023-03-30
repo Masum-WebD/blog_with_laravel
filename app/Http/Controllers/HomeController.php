@@ -15,6 +15,7 @@ class HomeController extends Controller
     }
     public function home(Request $request): View
     {
-        return view('home', $this->homeService->home($request));
+       $blogList= $this->homeService->home($request);
+        return view('home', $blogList);
     }
 }
